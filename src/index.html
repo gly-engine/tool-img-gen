@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="UTF-8" />
+        <meta name="description" content="Tente Lua online" />
+        <link rel="icon" type="image/png" href="./assets/logo.png" />
+        <title>IDE - Gly Game Engine</title>
+        <link rel="preload" href="/assets/CascadiaMono.ttf" as="font" type="font/ttf" crossorigin />
+        <style>
+            @font-face {
+                font-family: "Cascadia Code";
+                src: url(assets/CascadiaMono.ttf);
+            }
+        </style>
+        <link rel="stylesheet" href="./assets/index.css" />
+    </head>
+    <body>
+        <main>
+            <div id="game">
+                <canvas id="gameCanvas"></canvas>
+            </div>
+            <div id="buttons">
+                <form>
+                    <select id="resolution" name="resolution">
+                        <option value="48x48">48x48</option>
+                        <option value="80x80">80x80</option>
+                        <option value="128x128">128x128</option>
+                        <option value="256x256">256x256</option>
+                        <option value="512x512" selected>512x512</option>
+                    </select>
+                    <select id="format" name="format">
+                        <option value="png">png</option>
+                        <option value="bmp">bmp</option>
+                    </select>
+                    <label for="width">Width:</label>
+                    <input type="number" id="width" name="width" value="512" required>
+                    <label for="height">Height:</label>
+                    <input type="number" id="height" name="height" value="512" required>
+                    <button id="download">download</button>
+                </form>
+            </div>
+            <div id="editor-block">
+                <div id="editor"></div>
+            </div>
+        </main>
+        <script type="module" src="index.js"></script>
+    </body>
+</html>
