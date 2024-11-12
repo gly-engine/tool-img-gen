@@ -1,37 +1,61 @@
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+/*MUDAR CORES POR AQUI*/
+:root {
+    --background-color: #121316;
+    --background-color-secondary: #1e1e1e;
+    --background-color-input: #303236;
+    --text-color: #f5f5f5;
+    --button-color: #2589ff;
+    --button-hover-color: #0056b3;
+    --border-color: #ccc;
+}
+
 *,
 *::after,
 *::before {
     touch-action: none;
     box-sizing: border-box;
-    border: 0;
-    padding: 0;
-    margin: 0;
+
 }
 
 body {
-    background-color: #222;
-    color: #f5f5f5;
-    font-family: "Cascadia Code", monospace;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
 }
 
 main {
-    height: 100vh;
-    width: 80vmin;
+    display: flex;
+    width: 160vmin;
+    height: 80vh;
     margin: auto auto;
     overflow: hidden;
+    flex-direction: row-reverse;
 }
 
 #editor-block {
-    display: block;
-    height: 50vh;
-}
-
-#gameCanvas {
-    width: 100%
-}
-
-#game {
-    height: 50vh;
+    height: 100%;
+    width: 100%;
 }
 
 #editor {
@@ -39,9 +63,47 @@ main {
     height: 100%;
 }
 
+#editorContainer {
+    display: block;
+    height: 100%;
+    width: 50%;
+    padding: 20px;
+    background-color: var(--background-color-secondary);
+    border-radius: 14px;
+    margin-right: 5px;
+}
+
+#gameContainer {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    margin-left: 5px;
+}
+
+#gameCanvas {
+    width: 80%
+}
+
+#game {
+    height: 100%;
+    background-color: var(--background-color-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 14px;
+
+}
+
 #buttons {
     display: flex;
     gap: 10px;
+    padding: 10px;
+    margin-top: 15px;
+    justify-content: space-evenly;
+
+    background-color: var(--background-color-secondary);
+    border-radius: 14px;
 }
 
 form {
@@ -53,19 +115,56 @@ input,
 select {
     width: 64px;
     padding: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
 }
 
 button {
     padding: 5px 10px;
-    background-color: #007bff;
+    background-color: var(--button-color);
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: all ease 0.2s;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: var(--button-hover-color);
+}
+
+label svg {
+    fill: white;
+    width: 20px;
+    height: 20px;
+}
+
+label {
+    display: flex;
+    align-items: center;
+}
+
+#height,
+#width {
+    border: none;
+    background-color: var(--background-color-input);
+}
+
+input {
+    color: var(--text-color);
+}
+
+select {
+    border: none;
+    background-color: transparent;
+    color: var(--text-color);
+}
+
+select option {
+    appearance: none;
+    cursor: pointer;
+    color: var(--text-color);
+    border: none;
+    font-size: 10px;
+    background-color: #2A2A2A;
 }
