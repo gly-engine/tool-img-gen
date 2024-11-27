@@ -64,8 +64,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const apply = () => {
         const code = monacoEditor.getValue()
         gly.load(`return {init=function()end,loop=function()end,draw=function(std)\n${code}\nend}`)
-        gly.resize(elInpWidth.value, elInpHeight.value)
         window.requestAnimationFrame(gly.update)
+    }
+
+    const resizeAndApply = () => {
+        gly.resize(elInpWidth.value, elInpHeight.value)
+        apply()
     }
 
     monacoEditor.onDidChangeModelContent(() => {
@@ -79,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const [width, height] = elSelResolution.value.split('x').map(Number);
         elInpWidth.value = width;
         elInpHeight.value = height;
-        apply();
+        resizeAndApply();
     })
 
     elBtnDownload.addEventListener('click', (ev) => {
@@ -94,8 +98,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         URL.revokeObjectURL(url)
     })
 
-    elInpWidth.addEventListener('change', apply);
-    elInpHeight.addEventListener('change', apply);
+    elInpWidth.addEventListener('change', resizeAndApply);
+    elInpHeight.addEventListener('change', resizeAndApply);
     
-    apply();
+    resizeAndApply();
 })
