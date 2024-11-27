@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const elInpHeight = document.querySelector('#height')
     const elSelFormat = document.querySelector('#resolution')
     const elBtnDownload = document.querySelector('#download')
+    const elChkAntiAliasing = document.querySelector('#antialiasing')
     const elSelResolution = document.querySelector('#resolution')
     const elMonacoEditor = document.querySelector('#editor')
     const elCanvas = document.querySelector('#gameCanvas')
@@ -64,8 +65,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     const apply = () => {
         const code = monacoEditor.getValue()
         gly.load(`return {init=function()end,loop=function()end,draw=function(std)\n${code}\nend}`)
-        gly.resize(elInpWidth.value, elInpHeight.value)
         window.requestAnimationFrame(gly.update)
+    }
+
+    const resizeAndApply = () => {
+        gly.resize(elInpWidth.value, elInpHeight.value)
+        apply()
+    }
+
+    const toggleAntiAliasing = () => {
+        elCanvas.style.imageRendering = elChkAntiAliasing.checked ? '': 'pixelated'
     }
 
     monacoEditor.onDidChangeModelContent(() => {
@@ -79,7 +88,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         const [width, height] = elSelResolution.value.split('x').map(Number);
         elInpWidth.value = width;
         elInpHeight.value = height;
-        apply();
+        elChkAntiAliasing.checked = width > 128;
+        toggleAntiAliasing();
+        resizeAndApply();
     })
 
     elBtnDownload.addEventListener('click', (ev) => {
@@ -94,8 +105,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         URL.revokeObjectURL(url)
     })
 
-    elInpWidth.addEventListener('change', apply);
-    elInpHeight.addEventListener('change', apply);
+    elChkAntiAliasing.addEventListener('change', toggleAntiAliasing);
+    elInpWidth.addEventListener('change', resizeAndApply);
+    elInpHeight.addEventListener('change', resizeAndApply);
     
-    apply();
+    toggleAntiAliasing()
+    resizeAndApply();
 })
