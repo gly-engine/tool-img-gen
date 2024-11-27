@@ -78,6 +78,7 @@ main {
 
 #gameCanvas {
     width: 80%;
+    image-rendering: pixelated;
 }
 
 #game {
