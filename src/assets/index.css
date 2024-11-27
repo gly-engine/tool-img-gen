@@ -78,7 +78,6 @@ main {
 
 #gameCanvas {
     width: 80%;
-    image-rendering: pixelated;
 }
 
 #game {
@@ -267,7 +266,6 @@ select option {
     }
 
     #gameCanvas {
-        height: 100%;
         width: 100%;
     }
 }
