@@ -1,4 +1,4 @@
 std.draw.clear(std.color.blue)
 std.draw.color(std.color.white)
-std.draw.font(48)
-std.draw.text(8 , 8, 'Hello world!')
+std.text.font_size(std.app.width/8)
+std.text.print(8 , 8, 'Hello world!')
