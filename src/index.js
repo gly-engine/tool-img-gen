@@ -10,6 +10,7 @@ let monacoTimeout;
 document.addEventListener('DOMContentLoaded', async () => {
     const elInpWidth = document.querySelector('#width')
     const elInpHeight = document.querySelector('#height')
+    const elInpStroke = document.querySelector('#stroke')
     const elSelFormat = document.querySelector('#resolution')
     const elBtnDownload = document.querySelector('#download')
     const elChkAntiAliasing = document.querySelector('#antialiasing')
@@ -83,6 +84,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             apply()
         }, 100);
     });
+
+    elInpStroke.addEventListener('change', () => {
+        gly.stroke(parseFloat(elInpStroke.value))
+        apply();
+    })
 
     elSelResolution.addEventListener('change', () => {
         const [width, height] = elSelResolution.value.split('x').map(Number);
