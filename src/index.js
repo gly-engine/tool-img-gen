@@ -98,9 +98,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const ext = elSelFormat.value
         const url = elCanvas.toDataURL(`image/${ext}`)
         const downloadLink = document.createElement('a')
+        const uptime = (new Date()).toISOString().slice(2, 16).replace(/[-T:]/g, '').replace(/^(\d{6})(\d{4})$/, '$1-$2')
         downloadLink.href = url
         downloadLink.target = '_blank'
-        downloadLink.download = `icon.${ext}`
+        downloadLink.download = `img-${uptime}-${elInpWidth.value}x${elInpHeight.value}.${ext}`
         downloadLink.click()
         URL.revokeObjectURL(url)
     })
