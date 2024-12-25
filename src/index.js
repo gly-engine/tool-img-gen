@@ -10,6 +10,7 @@ let monacoTimeout;
 document.addEventListener('DOMContentLoaded', async () => {
     const elInpWidth = document.querySelector('#width')
     const elInpHeight = document.querySelector('#height')
+    const elInpStroke = document.querySelector('#stroke')
     const elSelFormat = document.querySelector('#resolution')
     const elBtnDownload = document.querySelector('#download')
     const elChkAntiAliasing = document.querySelector('#antialiasing')
@@ -26,7 +27,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     monacoEditor.setValue(defaultScript)
-    
+    if (location.hash) {
+        const params = new URLSearchParams(window.location.hash.slice(1))
+        const code = atob(params.get('code').replace(/_/g, '='))
+        const res = params.get('res').split('x')
+        if (code && code.length > 0) {
+            monacoEditor.setValue(code)
+        }
+        if (res && res.length == 2) {
+            [elInpWidth.value, elInpHeight.value] = res
+        }
+        if (params.has('line')) {
+            elInpStroke.value = parseFloat(params.get('line'))
+        }
+        if (params.has('aa')) {
+            elChkAntiAliasing.checked = parseInt(params.get('aa')) == 1
+        }
+    }
+
     const factory = new LuaFactory(wasmFile)
     const lua = await factory.createEngine()
     await lua.doString(gly_engine)
@@ -63,13 +81,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     gly.init(elCanvas)
 
     const apply = () => {
+        const params = new URLSearchParams()
         const code = monacoEditor.getValue()
         gly.load(`return {init=function()end,loop=function()end,draw=function(std)\n${code}\nend}`)
         window.requestAnimationFrame(gly.update)
+        params.set('res', `${elInpWidth.value}x${elInpHeight.value}`)
+        params.set('code', btoa(code).replace(/=/g, '_'))
+        params.set('line', elInpStroke.value)
+        params.set('aa', elChkAntiAliasing.checked? 1: 0)
+        location.hash = params.toString()
     }
 
     const resizeAndApply = () => {
         gly.resize(elInpWidth.value, elInpHeight.value)
+        gly.stroke(parseFloat(elInpStroke.value))
         apply()
     }
 
@@ -98,14 +123,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         const ext = elSelFormat.value
         const url = elCanvas.toDataURL(`image/${ext}`)
         const downloadLink = document.createElement('a')
+        const uptime = (new Date()).toISOString().slice(2, 16).replace(/[-T:]/g, '').replace(/^(\d{6})(\d{4})$/, '$1-$2')
         downloadLink.href = url
         downloadLink.target = '_blank'
-        downloadLink.download = `icon.${ext}`
+        downloadLink.download = `img-${uptime}-${elInpWidth.value}x${elInpHeight.value}.${ext}`
         downloadLink.click()
         URL.revokeObjectURL(url)
     })
 
     elChkAntiAliasing.addEventListener('change', toggleAntiAliasing);
+    elInpStroke.addEventListener('change', resizeAndApply);
     elInpWidth.addEventListener('change', resizeAndApply);
     elInpHeight.addEventListener('change', resizeAndApply);
     
