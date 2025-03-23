@@ -12,6 +12,11 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "Cascadia Code";
+    src: url("fonts/CascadiaMono.ttf") format("truetype");
+}
+
 /* MUDAR CORES POR AQUI */
 :root {
     --background-color: #121316;

@@ -1,23 +1,26 @@
 import wasmFile from 'wasmoon/dist/glue.wasm';
 import { LuaFactory, LuaMultiReturn } from 'wasmoon'
-import { editor } from 'monaco-editor'
+import { editor, languages } from 'monaco-editor/esm/vs/editor/editor.api'
+import * as lualang from 'monaco-editor/esm/vs/basic-languages/lua/lua'
 import gly from '@gamely/core-native-html5'
-import gly_engine from '@gamely/gly-engine-lite/dist/main.lua'
-import defaultScript from './default.lua'
+import gly_engine from '@gamely/gly-engine-lite' assert {type: "text"}
+import defaultScript from './default.lua' assert {type: "text"}
 
-let monacoTimeout;
+let monacoTimeout: number;
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const elInpWidth = document.querySelector('#width')
-    const elInpHeight = document.querySelector('#height')
-    const elInpStroke = document.querySelector('#stroke')
-    const elSelFormat = document.querySelector('#resolution')
-    const elBtnDownload = document.querySelector('#download')
-    const elChkAntiAliasing = document.querySelector('#antialiasing')
-    const elSelResolution = document.querySelector('#resolution')
-    const elMonacoEditor = document.querySelector('#editor')
-    const elCanvas = document.querySelector('#gameCanvas')
+    const elInpWidth = document.querySelector('#width') as HTMLInputElement
+    const elInpHeight = document.querySelector('#height') as HTMLInputElement
+    const elInpStroke = document.querySelector('#stroke') as HTMLInputElement
+    const elSelFormat = document.querySelector('#resolution') as HTMLInputElement
+    const elBtnDownload = document.querySelector('#download') as HTMLElement
+    const elChkAntiAliasing = document.querySelector('#antialiasing') as HTMLInputElement
+    const elSelResolution = document.querySelector('#resolution') as HTMLInputElement 
+    const elMonacoEditor = document.querySelector('#editor') as HTMLElement
+    const elCanvas = document.querySelector('#gameCanvas') as HTMLCanvasElement
 
+    languages.register({ id: 'lua' })
+    languages.setMonarchTokensProvider('lua', lualang.language)
     const monacoEditor = editor.create(elMonacoEditor, {
         language: 'lua',
         theme: 'vs-dark',

@@ -4,23 +4,27 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="UTF-8" />
-    <meta name="description" content="Tente Lua online" />
-    <link rel="icon" type="image/png" href="./assets/logo-gly.png" />
-    <title>Gly Image Generator</title>
-    <link rel="preload" href="/assets/CascadiaMono.ttf" as="font" type="font/ttf" crossorigin />
-    <style>
-        @font-face {
-            font-family: "Cascadia Code";
-            src: url(assets/CascadiaMono.ttf);
-        }
-    </style>
-    <link rel="stylesheet" href="./assets/index.css" />
+    <meta name="description" content="Generate screenshots and icons from Gly Engine Lua code!" />
+    <title>Image Generator - GlyEngine</title>
+    <meta name="title" content="Image Generator - GlyEngine" />
+    <meta name="description" content="Generate screenshots and icons from Gly Engine Lua code! " />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://gamelly.github.io/tool-img-gen/" />
+    <meta property="og:title" content="Image Generator - GlyEngine" />
+    <meta property="og:site_name" content="powered by gamely"/>
+    <meta property="og:description" content="Generate screenshots and icons from Gly Engine Lua code! " />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://gamelly.github.io/tool-img-gen/" />
+    <meta property="twitter:title" content="Image Generator - GlyEngine" />
+    <meta property="twitter:description" content="Generate screenshots and icons from Gly Engine Lua code!"/>
+    <link rel="icon" type="image/png" href="assets/logo-gly.png" />
+    <link rel="stylesheet" href="assets/index.css" />
 </head>
 
 <body>
     <div id="header">
         <h1>tool-img-gen</h1>
-        <img id="logo" src="./assets/logo-gly.png" alt="">
+        <img id="logo" src="assets/logo-gly.png" alt="">
     </div>
     <main>
         <div id="gameContainer">
@@ -83,7 +87,7 @@
             </div>
         </div>
     </main>
-    <script type="module" src="index.js"></script>
+    <script src="src/index.ts"></script>
 </body>
 
 </html>
