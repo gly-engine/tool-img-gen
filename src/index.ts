@@ -3,7 +3,7 @@ import { LuaFactory, LuaMultiReturn } from 'wasmoon'
 import { editor, languages } from 'monaco-editor/esm/vs/editor/editor.api'
 import * as lualang from 'monaco-editor/esm/vs/basic-languages/lua/lua'
 import gly from '@gamely/core-native-html5'
-import gly_engine from '@gamely/gly-engine-lite/dist/main.lua' assert {type: "text"}
+import gly_engine from '@gamely/gly-engine-lite' assert {type: "text"}
 import defaultScript from './default.lua' assert {type: "text"}
 
 let monacoTimeout: number;

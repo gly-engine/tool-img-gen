@@ -8,7 +8,7 @@ declare module 'wasmoon/dist/glue.wasm' {
     export default content;
 }
 
-declare module '@gamely/gly-engine' {
+declare module '@gamely/gly-engine-lite' {
     const content: string;
     export default content;
 }
