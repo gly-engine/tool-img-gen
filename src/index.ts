@@ -2,8 +2,8 @@ import wasmFile from 'wasmoon/dist/glue.wasm';
 import { LuaFactory, LuaMultiReturn } from 'wasmoon'
 import { editor } from 'monaco-editor'
 import gly from '@gamely/core-native-html5'
-import gly_engine from '@gamely/gly-engine-lite/dist/main.lua'
-import defaultScript from './default.lua'
+import gly_engine from '@gamely/gly-engine-lite/dist/main.lua' assert {type: "text"}
+import defaultScript from './default.lua' assert {type: "text"}
 
 let monacoTimeout;
 
