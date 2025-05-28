@@ -7,7 +7,7 @@
   "bugs": "https://github.com/gamelly/tool-img-gen/issues",
   "devDependencies": {
     "@gamely/core-native-html5": "^0.0.19",
-    "@gamely/gly-engine-lite": "^0.0.19",
+    "@gamely/gly-engine-micro": "^0.0.21",
     "wasmoon": "1.16.0",
     "monaco-editor": "0.35.0",
     "bun": "^1.2.4"
