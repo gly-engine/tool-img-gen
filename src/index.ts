@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     gly.global.set('native_callback_draw', lua.global.get('native_callback_draw'))
     gly.global.set('native_callback_resize', lua.global.get('native_callback_resize'))
 
-    gly.error('canvas, console')
+    gly.error('canvas')
     gly.init(elCanvas)
 
     const apply = () => {
